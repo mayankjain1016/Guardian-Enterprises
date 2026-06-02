@@ -215,7 +215,7 @@ export default function HeroBanner() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden h-56 sm:h-64 flex flex-col justify-center">
+            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden h-[22rem] sm:h-[24rem] flex flex-col justify-center">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={current}
