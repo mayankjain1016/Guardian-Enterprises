@@ -5,7 +5,7 @@ import { staggerContainer, fadeInLeft, fadeInRight, hoverScale } from '../utils/
 export default function AppDownload() {
   return (
     <motion.section 
-      className="py-14 sm:py-16 md:py-20 brand-gradient-bg relative overflow-hidden"
+      className="py-6 sm:py-16 md:py-20 brand-gradient-bg relative overflow-hidden"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
@@ -16,7 +16,7 @@ export default function AppDownload() {
       <div className="absolute bottom-0 right-0 w-64 sm:w-96 h-64 sm:h-96 rounded-full bg-white/5 translate-x-1/3 translate-y-1/3 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
           {/* Left — Phone Mockup */}
           <motion.div variants={fadeInLeft} className="flex justify-center order-2 lg:order-1">
             <div className="w-48 sm:w-56 md:w-64 bg-white rounded-3xl shadow-2xl border-4 border-white/50 overflow-hidden">
@@ -83,13 +83,13 @@ export default function AppDownload() {
 
           {/* Right — CTA */}
           <motion.div variants={fadeInRight} className="text-center lg:text-left order-1 lg:order-2">
-            <p className="text-orange-200 font-heading font-black text-3xl sm:text-4xl md:text-5xl mb-1">
+            <p className="text-orange-200 font-heading font-black text-2xl sm:text-3xl md:text-4xl mb-1">
               1 Lakh+
             </p>
-            <p className="text-white font-heading font-black text-2xl sm:text-3xl md:text-4xl mb-3 sm:mb-4">
+            <p className="text-white font-heading font-black text-xl sm:text-2xl md:text-3xl mb-3 sm:mb-4">
               DOWNLOADS
             </p>
-            <h2 className="text-white font-heading font-bold text-xl sm:text-2xl md:text-3xl mb-4 sm:mb-5">
+            <h2 className="text-white font-heading font-bold text-lg sm:text-xl md:text-2xl mb-4 sm:mb-5">
               Enjoy ₹0 Account Opening
             </h2>
             <p className="text-white/80 text-xs sm:text-sm mb-5 sm:mb-6 max-w-md mx-auto lg:mx-0">

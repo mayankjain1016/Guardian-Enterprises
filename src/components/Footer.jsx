@@ -133,10 +133,13 @@ export default function Footer() {
             indicative of future returns.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-slate-500">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-slate-500 mb-2">
             <p>© 2025 Guardian Enterprises. All Rights Reserved.</p>
             <p>AMFI Registered · ARN-XXXXXX · SEBI RIA Reg.</p>
           </div>
+          <p className="text-center text-[10px] sm:text-xs text-slate-500/70">
+            This website is developed by <span className="font-semibold text-slate-400">AFFOBE</span>
+          </p>
         </motion.div>
       </div>
     </motion.footer>

@@ -93,48 +93,48 @@ export default function TopFunds() {
             animate="visible"
             exit="hidden"
             variants={staggerContainer}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"
+            className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5"
           >
             {funds.map((fund, i) => (
               <motion.div
                 key={`${activeTab}-${i}`}
                 variants={fadeInUp}
                 whileHover="hover"
-                className="bg-white border border-slate-100 rounded-2xl p-4 sm:p-5 cursor-default"
+                className="bg-white border border-slate-100 rounded-xl sm:rounded-2xl p-3 sm:p-5 cursor-default"
               >
                 <motion.div variants={hoverScale} className="h-full flex flex-col">
                   {/* Top row */}
-                  <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
                     <div
-                      className={`w-9 h-9 sm:w-10 sm:h-10 ${fund.color} rounded-xl flex items-center justify-center text-white font-heading font-bold text-xs sm:text-sm shrink-0`}
+                      className={`w-8 h-8 sm:w-10 sm:h-10 ${fund.color} rounded-lg sm:rounded-xl flex items-center justify-center text-white font-heading font-bold text-[10px] sm:text-sm shrink-0`}
                     >
                       {fund.abbr}
                     </div>
                     <div className="min-w-0">
-                      <p className="font-heading font-bold text-xs sm:text-sm text-slate-800 truncate">
+                      <p className="font-heading font-bold text-[11px] sm:text-sm text-slate-800 truncate">
                         {fund.name}
                       </p>
-                      <p className="text-[10px] sm:text-xs text-slate-400">{fund.house}</p>
+                      <p className="text-[9px] sm:text-xs text-slate-400">{fund.house}</p>
                     </div>
                   </div>
 
                   {/* Returns row */}
-                  <div className="flex gap-1.5 sm:gap-2 mb-3 sm:mb-4 flex-wrap">
-                    <span className="text-[10px] sm:text-xs font-bold rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1 bg-green-100 text-green-700">
+                  <div className="flex gap-1 sm:gap-2 mb-3 sm:mb-4 flex-wrap">
+                    <span className="text-[9px] sm:text-xs font-bold rounded-md px-1 sm:px-2 py-0.5 sm:py-1 bg-green-100 text-green-700">
                       1Y: {fund.y1}
                     </span>
-                    <span className="text-[10px] sm:text-xs font-bold rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1 bg-blue-100 text-blue-700">
+                    <span className="text-[9px] sm:text-xs font-bold rounded-md px-1 sm:px-2 py-0.5 sm:py-1 bg-blue-100 text-blue-700">
                       3Y: {fund.y3}
                     </span>
-                    <span className="text-[10px] sm:text-xs font-bold rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1 bg-orange-100 text-orange-700">
+                    <span className="text-[9px] sm:text-xs font-bold rounded-md px-1 sm:px-2 py-0.5 sm:py-1 bg-orange-100 text-orange-700">
                       5Y: {fund.y5}
                     </span>
                   </div>
 
                   {/* Bottom row */}
-                  <div className="flex items-center justify-between mt-auto">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 justify-between mt-auto">
                     <span
-                      className={`text-[10px] sm:text-xs font-medium rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1 ${riskColors[fund.risk]}`}
+                      className={`text-[9px] sm:text-xs font-medium rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1 w-fit ${riskColors[fund.risk]}`}
                     >
                       {fund.risk} Risk
                     </span>
@@ -142,7 +142,7 @@ export default function TopFunds() {
                       variants={buttonHover}
                       whileHover="hover"
                       whileTap="tap"
-                      className="text-xs sm:text-sm brand-gradient-bg text-white rounded-lg px-3 sm:px-4 py-1.5 sm:py-2 font-semibold"
+                      className="text-[10px] sm:text-sm brand-gradient-bg text-white rounded-lg px-2 sm:px-4 py-1.5 sm:py-2 font-semibold"
                     >
                       Invest Now
                     </motion.button>

@@ -130,33 +130,33 @@ export default function Testimonials() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Google Style Header */}
-        <motion.div variants={fadeInUp} className="flex flex-col items-center text-center mb-10 sm:mb-14">
-          <h2 className="font-heading text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 mb-5">
+        <motion.div variants={fadeInUp} className="flex flex-col items-center text-center mb-8 sm:mb-10">
+          <h2 className="font-heading text-lg sm:text-xl md:text-2xl font-extrabold text-slate-900 mb-4">
             TRUSTED BY THOUSANDS
           </h2>
           
           {/* Aggregate Rating Badge */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 shadow-sm">
-            <div className="flex items-center gap-3">
-              <FcGoogle className="text-3xl sm:text-4xl" />
+          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-5 bg-slate-50 border border-slate-200 rounded-xl px-5 py-3 shadow-sm">
+            <div className="flex items-center gap-2.5">
+              <FcGoogle className="text-2xl sm:text-3xl" />
               <div className="text-left">
-                <p className="text-sm sm:text-base font-bold text-slate-900">Google Rating</p>
-                <div className="flex items-center gap-1.5 mt-0.5">
-                  <span className="text-base sm:text-lg font-black text-slate-900">4.9</span>
-                  <div className="flex text-[#FBBC04] text-sm sm:text-base">
+                <p className="text-xs sm:text-sm font-bold text-slate-900">Google Rating</p>
+                <div className="flex items-center gap-1 mt-0.5">
+                  <span className="text-sm sm:text-base font-black text-slate-900">4.9</span>
+                  <div className="flex text-[#FBBC04] text-xs sm:text-sm">
                     <MdStar /><MdStar /><MdStar /><MdStar /><MdStar />
                   </div>
                 </div>
               </div>
             </div>
             
-            <div className="hidden sm:block w-px h-10 bg-slate-300" />
+            <div className="hidden sm:block w-px h-8 bg-slate-300" />
             
             <div className="text-center sm:text-left">
-              <p className="text-xs sm:text-sm font-semibold text-slate-800">Based on 10,000+ reviews</p>
+              <p className="text-[11px] sm:text-xs font-semibold text-slate-800">Based on 10,000+ reviews</p>
               <div className="flex items-center justify-center sm:justify-start gap-1 mt-1">
-                <MdVerified className="text-blue-500 text-sm" />
-                <span className="text-[11px] sm:text-xs text-slate-500">Verified Investors</span>
+                <MdVerified className="text-blue-500 text-xs" />
+                <span className="text-[10px] sm:text-[11px] text-slate-500">Verified Investors</span>
               </div>
             </div>
           </div>
