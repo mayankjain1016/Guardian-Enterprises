@@ -1,4 +1,6 @@
 import { FiTrendingUp, FiDollarSign, FiClipboard, FiBriefcase, FiPieChart, FiShield } from 'react-icons/fi';
+import { motion } from 'framer-motion';
+import { fadeInUp, staggerContainer, hoverScale } from '../utils/animations';
 
 const investments = [
   {
@@ -41,10 +43,16 @@ const investments = [
 
 export default function PickInvestment() {
   return (
-    <section className="py-14 sm:py-16 md:py-20 bg-white">
+    <motion.section 
+      className="py-14 sm:py-16 md:py-20 bg-white"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+      variants={staggerContainer}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <div className="text-center mb-10 sm:mb-12">
+        <motion.div variants={fadeInUp} className="text-center mb-10 sm:mb-12">
           <h2 className="font-heading text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900">
             PICK YOUR PREFERRED INVESTMENT
           </h2>
@@ -52,31 +60,35 @@ export default function PickInvestment() {
           <p className="text-slate-500 text-sm sm:text-base">
             Explore Guardian Enterprises' full range of investment options
           </p>
-        </div>
+        </motion.div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
           {investments.map((item, i) => (
-            <div
+            <motion.div
               key={i}
-              className="bg-white border border-slate-100 rounded-2xl p-5 sm:p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group"
+              variants={fadeInUp}
+              whileHover="hover"
+              className="bg-white border border-slate-100 rounded-xl sm:rounded-2xl p-4 sm:p-6 cursor-pointer group"
             >
-              {/* Icon */}
-              <div
-                className={`w-12 h-12 sm:w-14 sm:h-14 ${item.bgColor} rounded-2xl flex items-center justify-center text-xl sm:text-2xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300`}
-              >
-                <item.icon />
-              </div>
-              {/* Title */}
-              <h3 className="font-heading font-bold text-lg sm:text-xl text-slate-800 mb-1.5 sm:mb-2">
-                {item.title}
-              </h3>
-              {/* Desc */}
-              <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">{item.desc}</p>
-            </div>
+              <motion.div variants={hoverScale} className="h-full">
+                {/* Icon */}
+                <div
+                  className={`w-10 h-10 sm:w-14 sm:h-14 ${item.bgColor} rounded-xl sm:rounded-2xl flex items-center justify-center text-lg sm:text-2xl mb-2 sm:mb-4 transition-transform duration-300`}
+                >
+                  <item.icon />
+                </div>
+                {/* Title */}
+                <h3 className="font-heading font-bold text-sm sm:text-xl text-slate-800 mb-1 sm:mb-2">
+                  {item.title}
+                </h3>
+                {/* Desc */}
+                <p className="text-slate-500 text-[10px] sm:text-sm leading-relaxed">{item.desc}</p>
+              </motion.div>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

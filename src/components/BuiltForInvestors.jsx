@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { FiBarChart2, FiZap, FiBell, FiTrendingUp } from 'react-icons/fi';
+import { motion } from 'framer-motion';
+import { staggerContainer, fadeInLeft, fadeInRight } from '../utils/animations';
 
 const features = [
   {
@@ -23,13 +25,17 @@ export default function BuiltForInvestors() {
   const [active, setActive] = useState(0);
 
   return (
-    <section
+    <motion.section
       className="py-14 sm:py-16 md:py-20 overflow-hidden bg-slate-50"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={staggerContainer}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
           {/* Left — Text + Features */}
-          <div>
+          <motion.div variants={fadeInLeft}>
             <p className="text-slate-400 font-extrabold text-lg sm:text-xl md:text-2xl font-heading mb-1">
               BUILT FOR
             </p>
@@ -71,10 +77,10 @@ export default function BuiltForInvestors() {
                 );
               })}
             </div>
-          </div>
+          </motion.div>
 
           {/* Right — Device Mockups */}
-          <div className="relative pb-8">
+          <motion.div variants={fadeInRight} className="relative pb-8">
             {/* Main Monitor Frame */}
             <div className="w-full max-w-md mx-auto bg-slate-800 rounded-2xl p-3 shadow-2xl">
               {/* Title bar */}
@@ -140,9 +146,9 @@ export default function BuiltForInvestors() {
                 <span className="text-white text-[8px] sm:text-[9px] font-semibold">INVEST NOW</span>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

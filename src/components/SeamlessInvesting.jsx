@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { MdPercent, MdBarChart, MdAccessTime } from 'react-icons/md';
 import { FiCheckCircle, FiBarChart2, FiClock, FiSettings } from 'react-icons/fi';
+import { motion, AnimatePresence } from 'framer-motion';
+import { fadeInUp, staggerContainer, fadeInLeft, fadeInRight } from '../utils/animations';
 
 const features = [
   {
@@ -43,11 +45,17 @@ export default function SeamlessInvesting() {
   const currentPhone = features[active].phone;
 
   return (
-    <section className="py-14 sm:py-16 md:py-20 bg-slate-50 overflow-hidden">
+    <motion.section 
+      className="py-14 sm:py-16 md:py-20 bg-slate-50 overflow-hidden"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={staggerContainer}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
           {/* Left — Phone Mockup */}
-          <div className="relative flex justify-center order-2 lg:order-1">
+          <motion.div variants={fadeInLeft} className="relative flex justify-center order-2 lg:order-1">
             <div className="w-60 sm:w-72 bg-slate-900 rounded-3xl relative shadow-2xl overflow-hidden border-4 border-slate-700">
               {/* Phone notch */}
               <div className="w-20 h-4 bg-slate-900 rounded-b-xl mx-auto" />
@@ -93,14 +101,20 @@ export default function SeamlessInvesting() {
             </div>
 
             {/* Floating badge — positioned safely inside container */}
-            <div className="absolute right-2 sm:right-8 lg:right-0 bottom-16 sm:bottom-20 bg-white rounded-xl p-2.5 sm:p-3 shadow-lg border border-slate-100 max-w-[160px] sm:max-w-[180px] z-10">
+            <motion.div 
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              key={active}
+              className="absolute right-2 sm:right-8 lg:right-0 bottom-16 sm:bottom-20 bg-white rounded-xl p-2.5 sm:p-3 shadow-lg border border-slate-100 max-w-[160px] sm:max-w-[180px] z-10"
+            >
               <p className="text-xs sm:text-sm font-semibold text-slate-800">{currentPhone.badge}</p>
               <p className="text-[10px] sm:text-xs text-slate-400 mt-0.5">{currentPhone.badgeSub}</p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Right — Text + Features */}
-          <div className="order-1 lg:order-2">
+          <motion.div variants={fadeInRight} className="order-1 lg:order-2">
             <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-slate-900 mb-2">
               SEAMLESS INVESTING
             </h2>
@@ -115,8 +129,9 @@ export default function SeamlessInvesting() {
                 const Icon = f.icon;
                 const isActive = i === active;
                 return (
-                  <div
+                  <motion.div
                     key={i}
+                    whileHover={{ y: -5 }}
                     onClick={() => setActive(i)}
                     className={`rounded-xl p-3 sm:p-4 cursor-pointer transition-all duration-300 border-l-4 ${
                       isActive
@@ -139,13 +154,13 @@ export default function SeamlessInvesting() {
                         <p className="text-slate-500 text-xs mt-1">{f.desc}</p>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import { FiCheck, FiStar, FiCheckCircle } from 'react-icons/fi';
+import { motion, AnimatePresence } from 'framer-motion';
+import { fadeInUp, staggerContainer, buttonHover } from '../utils/animations';
+import AnimatedGrid from './AnimatedGrid';
 
 const slides = [
   {
@@ -125,32 +128,42 @@ export default function HeroBanner() {
 
   return (
     <section
-      className="relative overflow-hidden py-10 sm:py-14 md:py-20 bg-slate-50"
+      className="relative overflow-hidden py-10 sm:py-14 md:py-20 bg-white"
     >
+      {/* Background Grid */}
+      <div className="absolute inset-0 z-0">
+        <AnimatedGrid />
+      </div>
+
       {/* Background decoration — contained by overflow-hidden */}
-      <div className="absolute -top-20 -right-20 w-72 sm:w-96 h-72 sm:h-96 rounded-full bg-orange-50 opacity-50 pointer-events-none" />
-      <div className="absolute -bottom-10 -left-10 w-48 sm:w-64 h-48 sm:h-64 rounded-full bg-green-50 opacity-50 pointer-events-none" />
+      <div className="absolute -top-20 -right-20 w-72 sm:w-96 h-72 sm:h-96 rounded-full bg-orange-50 opacity-50 pointer-events-none z-0" />
+      <div className="absolute -bottom-10 -left-10 w-48 sm:w-64 h-48 sm:h-64 rounded-full bg-green-50 opacity-50 pointer-events-none z-0" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           {/* Left Column */}
-          <div className="lg:col-span-7">
-            <span className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-full bg-orange-50 border border-orange-200 text-orange-600 text-xs sm:text-sm font-medium mb-4 sm:mb-5">
+          <motion.div 
+            className="lg:col-span-7"
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.span variants={fadeInUp} className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-full bg-orange-50 border border-orange-200 text-orange-600 text-xs sm:text-sm font-medium mb-4 sm:mb-5">
               <FiStar className="text-orange-500" /> India's Trusted MFD Partner
-            </span>
+            </motion.span>
 
-            <h1 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight mb-3 sm:mb-4">
+            <motion.h1 variants={fadeInUp} className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight mb-3 sm:mb-4">
               Your One-Stop{' '}
               <span className="brand-gradient-text">Investment Platform</span>
-            </h1>
+            </motion.h1>
 
-            <p className="text-slate-500 text-sm sm:text-base md:text-lg mb-5 sm:mb-7 max-w-lg">
+            <motion.p variants={fadeInUp} className="text-slate-500 text-sm sm:text-base md:text-lg mb-5 sm:mb-7 max-w-lg">
               Guardian Enterprises — a trusted partner with 15+ years of experience in
               Mutual Funds & Financial Advisory. Grow your wealth with confidence.
-            </p>
+            </motion.p>
 
             {/* Phone input CTA */}
-            <div className="mb-4 max-w-lg">
+            <motion.div variants={fadeInUp} className="mb-4 max-w-lg">
               <div className="flex flex-col sm:flex-row">
                 <div className="flex flex-1">
                   <span className="flex items-center px-3 bg-slate-100 border border-r-0 border-slate-300 rounded-l-lg text-sm text-slate-500 font-medium shrink-0">
@@ -162,23 +175,28 @@ export default function HeroBanner() {
                     className="border border-slate-300 px-4 py-3 text-sm sm:text-base w-full focus:outline-none focus:border-orange-500 transition-colors sm:rounded-none rounded-r-lg sm:rounded-r-none"
                   />
                 </div>
-                <button className="brand-gradient-bg text-white px-6 py-3 font-semibold text-sm hover:opacity-90 transition-all duration-300 whitespace-nowrap mt-2 sm:mt-0 rounded-lg sm:rounded-l-none sm:rounded-r-lg">
+                <motion.button 
+                  variants={buttonHover}
+                  whileHover="hover"
+                  whileTap="tap"
+                  className="brand-gradient-bg text-white px-6 py-3 font-semibold text-sm transition-all duration-300 whitespace-nowrap mt-2 sm:mt-0 rounded-lg sm:rounded-l-none sm:rounded-r-lg"
+                >
                   Get Started →
-                </button>
+                </motion.button>
               </div>
-            </div>
+            </motion.div>
 
             {/* Stat chips */}
-            <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 mb-4 sm:mb-5">
+            <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-2 text-xs text-slate-500 mb-4 sm:mb-5">
               <span>₹0 Account Opening</span>
               <span className="text-slate-300">|</span>
               <span>10,000+ Clients</span>
               <span className="text-slate-300">|</span>
               <span>₹0 Advisory Fee</span>
-            </div>
+            </motion.div>
 
             {/* Trust badges */}
-            <div className="flex flex-wrap gap-2 sm:gap-3">
+            <motion.div variants={fadeInUp} className="flex flex-wrap gap-2 sm:gap-3">
               {['SEBI Reg.', 'AMFI Certified', 'ISO 9001'].map((badge) => (
                 <span
                   key={badge}
@@ -187,15 +205,28 @@ export default function HeroBanner() {
                   <FiCheckCircle className="text-green-600" /> {badge}
                 </span>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Right Column — Carousel */}
-          <div className="lg:col-span-5">
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden">
-              <div className="transition-all duration-500 ease-in-out" key={current}>
-                {renderSlide(slides[current])}
-              </div>
+          <motion.div 
+            className="lg:col-span-5"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden h-56 sm:h-64 flex flex-col justify-center">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={current}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {renderSlide(slides[current])}
+                </motion.div>
+              </AnimatePresence>
             </div>
             {/* Dot indicators */}
             <div className="flex justify-center gap-2 mt-4">
@@ -212,7 +243,7 @@ export default function HeroBanner() {
                 />
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

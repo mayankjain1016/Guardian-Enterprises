@@ -1,8 +1,16 @@
 import { FaApple, FaGooglePlay } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { staggerContainer, fadeInLeft, fadeInRight, hoverScale } from '../utils/animations';
 
 export default function AppDownload() {
   return (
-    <section className="py-14 sm:py-16 md:py-20 brand-gradient-bg relative overflow-hidden">
+    <motion.section 
+      className="py-14 sm:py-16 md:py-20 brand-gradient-bg relative overflow-hidden"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={staggerContainer}
+    >
       {/* Subtle decorative circles */}
       <div className="absolute top-0 left-0 w-48 sm:w-64 h-48 sm:h-64 rounded-full bg-white/5 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-64 sm:w-96 h-64 sm:h-96 rounded-full bg-white/5 translate-x-1/3 translate-y-1/3 pointer-events-none" />
@@ -10,7 +18,7 @@ export default function AppDownload() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
           {/* Left — Phone Mockup */}
-          <div className="flex justify-center order-2 lg:order-1">
+          <motion.div variants={fadeInLeft} className="flex justify-center order-2 lg:order-1">
             <div className="w-48 sm:w-56 md:w-64 bg-white rounded-3xl shadow-2xl border-4 border-white/50 overflow-hidden">
               {/* Phone Header */}
               <div className="bg-slate-50 p-2.5 sm:p-3 border-b border-slate-100">
@@ -71,10 +79,10 @@ export default function AppDownload() {
                 <span>More</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right — CTA */}
-          <div className="text-center lg:text-left order-1 lg:order-2">
+          <motion.div variants={fadeInRight} className="text-center lg:text-left order-1 lg:order-2">
             <p className="text-orange-200 font-heading font-black text-3xl sm:text-4xl md:text-5xl mb-1">
               1 Lakh+
             </p>
@@ -105,7 +113,9 @@ export default function AppDownload() {
 
             {/* App Store Buttons */}
             <div className="flex flex-wrap justify-center lg:justify-start gap-3">
-              <a
+              <motion.a
+                variants={hoverScale}
+                whileHover="hover"
                 href="#"
                 className="flex items-center gap-2 bg-black/80 hover:bg-black text-white rounded-xl px-3 sm:px-4 py-2.5 sm:py-3 transition-colors"
               >
@@ -114,8 +124,10 @@ export default function AppDownload() {
                   <p className="text-[8px] sm:text-[9px] text-slate-300">Download on the</p>
                   <p className="text-xs sm:text-sm font-semibold -mt-0.5">App Store</p>
                 </div>
-              </a>
-              <a
+              </motion.a>
+              <motion.a
+                variants={hoverScale}
+                whileHover="hover"
                 href="#"
                 className="flex items-center gap-2 bg-black/80 hover:bg-black text-white rounded-xl px-3 sm:px-4 py-2.5 sm:py-3 transition-colors"
               >
@@ -124,11 +136,11 @@ export default function AppDownload() {
                   <p className="text-[8px] sm:text-[9px] text-slate-300">Get it on</p>
                   <p className="text-xs sm:text-sm font-semibold -mt-0.5">Google Play</p>
                 </div>
-              </a>
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

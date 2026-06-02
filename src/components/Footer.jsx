@@ -1,6 +1,8 @@
 import { FaTwitter, FaLinkedinIn, FaInstagram, FaYoutube } from 'react-icons/fa';
 import { FiAlertTriangle } from 'react-icons/fi';
 import logo from '../Logo.jpeg';
+import { motion } from 'framer-motion';
+import { fadeInUp, staggerContainer } from '../utils/animations';
 
 const footerLinks = {
   'Company Overview': [
@@ -54,20 +56,28 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer
+    <motion.footer
       className="pt-10 sm:pt-14 pb-5 sm:pb-6 text-slate-400"
       style={{
         backgroundColor: '#0f172a',
         backgroundImage: 'radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)',
         backgroundSize: '24px 24px',
       }}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+      variants={staggerContainer}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Row — Logo + Social */}
-        <div className="mb-8 sm:mb-10">
+        <motion.div variants={fadeInUp} className="mb-8 sm:mb-10">
           <div className="max-w-xs">
             <div className="flex items-center gap-1 mb-2 sm:mb-3">
-              <img src={logo} alt="Guardian Enterprises Logo" className="h-14 sm:h-20 w-auto object-contain" />
+              <img 
+                src={logo} 
+                alt="Guardian Enterprises Logo" 
+                className="h-10 sm:h-16 w-auto object-contain mix-blend-screen invert hue-rotate-180 brightness-125" 
+              />
             </div>
             <p className="text-orange-400 text-[10px] sm:text-xs font-semibold mb-2 sm:mb-3">
               Growth • Trust • Vision
@@ -89,12 +99,12 @@ export default function Footer() {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Link Columns */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-10">
           {Object.entries(footerLinks).map(([title, links]) => (
-            <div key={title}>
+            <motion.div variants={fadeInUp} key={title}>
               <h4 className="text-white font-heading font-bold text-xs sm:text-sm mb-3 sm:mb-4 uppercase tracking-wider">
                 {title}
               </h4>
@@ -110,12 +120,12 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Divider */}
-        <div className="border-t border-slate-700 pt-4 sm:pt-5">
+        <motion.div variants={fadeInUp} className="border-t border-slate-700 pt-4 sm:pt-5">
           <p className="flex items-start sm:items-center justify-center gap-1.5 text-center text-[10px] sm:text-xs text-slate-500 mb-3 sm:mb-4 max-w-3xl mx-auto leading-relaxed">
             <FiAlertTriangle className="text-orange-400/70 shrink-0 mt-0.5 sm:mt-0" /> Investments in mutual
             funds are subject to market risks. Please read all scheme-related
@@ -127,8 +137,8 @@ export default function Footer() {
             <p>© 2025 Guardian Enterprises. All Rights Reserved.</p>
             <p>AMFI Registered · ARN-XXXXXX · SEBI RIA Reg.</p>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }

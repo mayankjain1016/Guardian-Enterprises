@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 import { MdStar, MdVerified } from 'react-icons/md';
+import { motion, AnimatePresence } from 'framer-motion';
+import { fadeInUp, staggerContainer, hoverScale } from '../utils/animations';
 
 const testimonials = [
   {
@@ -80,10 +82,13 @@ export default function Testimonials() {
   };
 
   const renderCard = (t, i) => (
-    <div
+    <motion.div
       key={`${t.initials}-${i}`}
-      className="bg-white border border-slate-200 rounded-xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-all duration-300"
+      variants={fadeInUp}
+      whileHover="hover"
+      className="bg-white border border-slate-200 rounded-xl p-5 sm:p-6 shadow-sm cursor-default"
     >
+      <motion.div variants={hoverScale} className="h-full">
       {/* Header: User Info + Google Icon */}
       <div className="flex justify-between items-start mb-3">
         <div className="flex items-center gap-3">
@@ -110,15 +115,22 @@ export default function Testimonials() {
       <p className="text-slate-700 text-sm leading-relaxed line-clamp-4">
         {t.text}
       </p>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 
   return (
-    <section className="py-14 sm:py-16 md:py-20 bg-white border-y border-slate-100 overflow-hidden">
+    <motion.section 
+      className="py-14 sm:py-16 md:py-20 bg-white border-y border-slate-100 overflow-hidden"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+      variants={staggerContainer}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Google Style Header */}
-        <div className="flex flex-col items-center text-center mb-10 sm:mb-14">
+        <motion.div variants={fadeInUp} className="flex flex-col items-center text-center mb-10 sm:mb-14">
           <h2 className="font-heading text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 mb-5">
             TRUSTED BY THOUSANDS
           </h2>
@@ -148,10 +160,10 @@ export default function Testimonials() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Carousel container */}
-        <div className="relative">
+        <motion.div variants={fadeInUp} className="relative">
           {/* Arrows */}
           <button
             onClick={prev}
@@ -170,15 +182,36 @@ export default function Testimonials() {
           </button>
 
           {/* Desktop: 3 cards */}
-          <div className="hidden md:grid grid-cols-3 gap-5 lg:gap-6 px-12 lg:px-14">
-            {getVisibleCards().map((t, i) => renderCard(t, i))}
+          <div className="hidden md:block px-12 lg:px-14">
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={current}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="grid grid-cols-3 gap-5 lg:gap-6"
+              >
+                {getVisibleCards().map((t, i) => renderCard(t, i))}
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           {/* Mobile: 1 card */}
           <div className="md:hidden px-8">
-            {renderCard(testimonials[current], current)}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                {renderCard(testimonials[current], current)}
+              </motion.div>
+            </AnimatePresence>
           </div>
-        </div>
+        </motion.div>
 
         {/* Dots */}
         <div className="flex justify-center gap-2 mt-8">
@@ -195,6 +228,6 @@ export default function Testimonials() {
         </div>
         
       </div>
-    </section>
+    </motion.section>
   );
 }

@@ -1,5 +1,7 @@
 import { FiArrowRight, FiFileText, FiBookOpen, FiBarChart2 } from 'react-icons/fi';
 import { FaLightbulb } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { staggerContainer, fadeInLeft, fadeInRight } from '../utils/animations';
 
 const items = [
   {
@@ -21,11 +23,17 @@ const items = [
 
 export default function LearnSection() {
   return (
-    <section className="py-14 sm:py-16 md:py-20 bg-white overflow-hidden">
+    <motion.section 
+      className="py-14 sm:py-16 md:py-20 bg-white overflow-hidden"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={staggerContainer}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
           {/* Left — Text */}
-          <div>
+          <motion.div variants={fadeInLeft}>
             <p className="text-slate-700 font-heading font-extrabold text-xl sm:text-2xl md:text-3xl mb-1">
               LEARN TO GROW WITH
             </p>
@@ -57,10 +65,10 @@ export default function LearnSection() {
                 </a>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Right — Decorative */}
-          <div className="flex justify-center">
+          <motion.div variants={fadeInRight} className="flex justify-center">
             <div className="w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80 bg-slate-50 rounded-3xl flex items-center justify-center relative">
               <div className="text-5xl sm:text-6xl md:text-7xl text-orange-400"><FiBarChart2 /></div>
 
@@ -84,9 +92,9 @@ export default function LearnSection() {
                 XIRR 22%
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

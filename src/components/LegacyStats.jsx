@@ -1,5 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { FiShield, FiStar, FiUsers, FiSmartphone } from 'react-icons/fi';
+import { motion } from 'framer-motion';
+import { staggerContainer, fadeInLeft, fadeInRight, hoverScale } from '../utils/animations';
 
 const stats = [
   { icon: FiShield, iconColor: 'text-orange-400', bgCard: 'bg-slate-800', number: 15, suffix: '+', label: 'Years of Trust' },
@@ -44,32 +46,22 @@ function AnimatedNumber({ target, suffix, triggered }) {
 }
 
 export default function LegacyStats() {
-  const ref = useRef(null);
   const [triggered, setTriggered] = useState(false);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !triggered) {
-          setTriggered(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [triggered]);
-
   return (
-    <section
-      ref={ref}
+    <motion.section
       className="py-10 sm:py-12 md:py-16 bg-slate-900 border-y border-slate-800"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={staggerContainer}
+      onViewportEnter={() => setTriggered(true)}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           
           {/* Left Column — Text */}
-          <div className="lg:col-span-5 text-center lg:text-left">
+          <motion.div variants={fadeInLeft} className="lg:col-span-5 text-center lg:text-left">
             <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight mb-5">
               LEGACY OF <br className="hidden lg:block" />
               <span className="text-orange-500">COMMITTED EXCELLENCE</span>
@@ -78,16 +70,18 @@ export default function LegacyStats() {
             <p className="text-slate-400 text-base sm:text-lg max-w-lg mx-auto lg:mx-0 leading-relaxed">
               Serving thousands of happy investors for over a decade. We combine deep market expertise with unwavering integrity to build your wealth.
             </p>
-          </div>
+          </motion.div>
 
           {/* Right Column — 2x2 Stats Grid */}
-          <div className="lg:col-span-7">
+          <motion.div variants={fadeInRight} className="lg:col-span-7">
             <div className="grid grid-cols-2 gap-4 sm:gap-6">
               {stats.map((stat, i) => (
-                <div 
+                <motion.div 
                   key={i} 
-                  className={`${stat.bgCard} rounded-xl p-4 sm:p-5 hover:-translate-y-1 hover:bg-slate-700 transition-all duration-300 border border-slate-700/50 shadow-md group`}
+                  whileHover="hover"
+                  className={`${stat.bgCard} rounded-xl p-4 sm:p-5 border border-slate-700/50 shadow-md group cursor-default`}
                 >
+                  <motion.div variants={hoverScale}>
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3 sm:mb-4 gap-2">
                     <div className={`text-2xl sm:text-3xl ${stat.iconColor} group-hover:scale-110 transition-transform duration-300`}>
                       <stat.icon />
@@ -97,13 +91,14 @@ export default function LegacyStats() {
                     <AnimatedNumber target={stat.number} suffix={stat.suffix} triggered={triggered} />
                   </p>
                   <p className="text-slate-400 text-xs sm:text-sm font-medium">{stat.label}</p>
-                </div>
+                  </motion.div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
           
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

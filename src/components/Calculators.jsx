@@ -1,4 +1,6 @@
 import { useState, useMemo } from 'react';
+import { motion } from 'framer-motion';
+import { fadeInUp, staggerContainer, buttonHover } from '../utils/animations';
 
 const calculatorTabs = ['SIP Calculator', 'Lumpsum Calculator', 'CAGR Calculator'];
 
@@ -26,21 +28,29 @@ export default function Calculators() {
   const investedPct = (result.invested / result.total) * 100;
 
   return (
-    <section className="py-14 sm:py-16 md:py-20 bg-slate-50">
+    <motion.section 
+      className="py-14 sm:py-16 md:py-20 bg-slate-50"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+      variants={staggerContainer}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <div className="text-center mb-8 sm:mb-10">
+        <motion.div variants={fadeInUp} className="text-center mb-8 sm:mb-10">
           <h2 className="font-heading text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900">
             CALCULATE YOUR RETURNS EASILY
           </h2>
           <div className="w-16 h-1 brand-gradient-bg rounded-full mx-auto mt-3 mb-4 sm:mb-6" />
-        </div>
+        </motion.div>
 
         {/* Calculator Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-10">
+        <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-10">
           {calculatorTabs.map((tab, i) => (
-            <button
+            <motion.button
               key={tab}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setActiveTab(i)}
               className={`rounded-full px-4 sm:px-6 py-2.5 sm:py-3 font-semibold text-xs sm:text-sm transition-all duration-300 ${
                 i === activeTab
@@ -49,12 +59,12 @@ export default function Calculators() {
               }`}
             >
               {tab} →
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
 
         {/* SIP Calculator */}
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+        <motion.div variants={fadeInUp} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             {/* Left — Inputs */}
             <div className="p-5 sm:p-6 md:p-8 border-b lg:border-b-0 lg:border-r border-slate-100">
@@ -177,20 +187,29 @@ export default function Calculators() {
                 </div>
               </div>
 
-              <button className="w-full brand-gradient-bg text-white rounded-lg px-6 py-2.5 sm:py-3 font-semibold text-sm hover:opacity-90 transition-all duration-300">
+              <motion.button 
+                variants={buttonHover}
+                whileHover="hover"
+                whileTap="tap"
+                className="w-full brand-gradient-bg text-white rounded-lg px-6 py-2.5 sm:py-3 font-semibold text-sm"
+              >
                 Start SIP Now →
-              </button>
+              </motion.button>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Explore Link */}
-        <div className="text-center mt-5 sm:mt-6">
-          <a href="#" className="text-orange-500 text-sm font-semibold hover:text-orange-600 transition-colors">
+        <motion.div variants={fadeInUp} className="text-center mt-5 sm:mt-6">
+          <motion.a 
+            whileHover={{ scale: 1.05 }}
+            href="#" 
+            className="inline-block text-orange-500 text-sm font-semibold hover:text-orange-600 transition-colors"
+          >
             EXPLORE ALL CALCULATORS →
-          </a>
-        </div>
+          </motion.a>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FiSearch, FiMenu, FiX } from 'react-icons/fi';
+import { motion } from 'framer-motion';
 import logo from '../Logo.jpeg';
 
 const navLinks = [
@@ -33,7 +34,10 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ type: 'spring', stiffness: 100, damping: 20 }}
       className={`bg-white sticky top-0 z-50 transition-shadow duration-300 ${
         scrolled ? 'shadow-md' : 'shadow-sm'
       }`}
@@ -44,7 +48,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between py-2 sm:py-3 gap-3 sm:gap-4">
             {/* Logo */}
             <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
-              <img src={logo} alt="Guardian Enterprises Logo" className="h-14 sm:h-20 w-auto object-contain" />
+              <img src={logo} alt="Guardian Enterprises Logo" className="h-10 sm:h-16 w-auto object-contain" />
             </div>
 
             {/* Search Bar — hidden on mobile */}
@@ -61,12 +65,20 @@ export default function Navbar() {
 
             {/* Desktop Buttons */}
             <div className="hidden md:flex items-center gap-3 shrink-0">
-              <button className="brand-gradient-bg text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:opacity-90 transition-all duration-300 shadow-sm">
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="brand-gradient-bg text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:opacity-90 shadow-sm"
+              >
                 Open Free Account
-              </button>
-              <button className="border-2 border-orange-500 text-orange-500 px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-orange-50 transition-all duration-300">
+              </motion.button>
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="border-2 border-orange-500 text-orange-500 px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-orange-50"
+              >
                 Login
-              </button>
+              </motion.button>
             </div>
 
             {/* Mobile hamburger */}
@@ -86,13 +98,14 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-6 overflow-x-auto scrollbar-hide h-11">
             {navLinks.map((link) => (
-              <a
+              <motion.a
                 key={link}
                 href="#"
-                className="whitespace-nowrap text-sm font-medium text-slate-600 hover:text-orange-500 hover:border-b-2 hover:border-orange-500 pb-px transition-all duration-200"
+                whileHover={{ scale: 1.05, color: '#f97316' }}
+                className="whitespace-nowrap text-sm font-medium text-slate-600 hover:border-b-2 hover:border-orange-500 pb-px transition-all duration-200"
               >
                 {link}
-              </a>
+              </motion.a>
             ))}
           </div>
         </div>
@@ -133,6 +146,6 @@ export default function Navbar() {
           </button>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }

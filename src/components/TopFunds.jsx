@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { fadeInUp, staggerContainer, hoverScale, buttonHover } from '../utils/animations';
 
 const tabs = ['Equity', 'Debt', 'Hybrid', 'ELSS'];
 
@@ -48,21 +50,29 @@ export default function TopFunds() {
   const funds = fundsData[activeTab];
 
   return (
-    <section className="py-14 sm:py-16 md:py-20 bg-white">
+    <motion.section 
+      className="py-14 sm:py-16 md:py-20 bg-white"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+      variants={staggerContainer}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <div className="text-center mb-8 sm:mb-10">
+        <motion.div variants={fadeInUp} className="text-center mb-8 sm:mb-10">
           <h2 className="font-heading text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900">
             TOP PERFORMING MUTUAL FUNDS
           </h2>
           <div className="w-16 h-1 brand-gradient-bg rounded-full mx-auto mt-3 mb-4 sm:mb-6" />
-        </div>
+        </motion.div>
 
         {/* Tab pills */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-10">
+        <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-10">
           {tabs.map((tab) => (
-            <button
+            <motion.button
               key={tab}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setActiveTab(tab)}
               className={`rounded-full px-4 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold transition-all duration-300 ${
                 tab === activeTab
@@ -71,60 +81,78 @@ export default function TopFunds() {
               }`}
             >
               {tab}
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Fund Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-          {funds.map((fund, i) => (
-            <div
-              key={`${activeTab}-${i}`}
-              className="bg-white border border-slate-100 rounded-2xl p-4 sm:p-5 hover:shadow-md hover:-translate-y-1 transition-all duration-300"
-            >
-              {/* Top row */}
-              <div className="flex items-center gap-3 mb-3 sm:mb-4">
-                <div
-                  className={`w-9 h-9 sm:w-10 sm:h-10 ${fund.color} rounded-xl flex items-center justify-center text-white font-heading font-bold text-xs sm:text-sm shrink-0`}
-                >
-                  {fund.abbr}
-                </div>
-                <div className="min-w-0">
-                  <p className="font-heading font-bold text-xs sm:text-sm text-slate-800 truncate">
-                    {fund.name}
-                  </p>
-                  <p className="text-[10px] sm:text-xs text-slate-400">{fund.house}</p>
-                </div>
-              </div>
+        <AnimatePresence mode="wait">
+          <motion.div 
+            key={activeTab}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={staggerContainer}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"
+          >
+            {funds.map((fund, i) => (
+              <motion.div
+                key={`${activeTab}-${i}`}
+                variants={fadeInUp}
+                whileHover="hover"
+                className="bg-white border border-slate-100 rounded-2xl p-4 sm:p-5 cursor-default"
+              >
+                <motion.div variants={hoverScale} className="h-full flex flex-col">
+                  {/* Top row */}
+                  <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                    <div
+                      className={`w-9 h-9 sm:w-10 sm:h-10 ${fund.color} rounded-xl flex items-center justify-center text-white font-heading font-bold text-xs sm:text-sm shrink-0`}
+                    >
+                      {fund.abbr}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="font-heading font-bold text-xs sm:text-sm text-slate-800 truncate">
+                        {fund.name}
+                      </p>
+                      <p className="text-[10px] sm:text-xs text-slate-400">{fund.house}</p>
+                    </div>
+                  </div>
 
-              {/* Returns row */}
-              <div className="flex gap-1.5 sm:gap-2 mb-3 sm:mb-4 flex-wrap">
-                <span className="text-[10px] sm:text-xs font-bold rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1 bg-green-100 text-green-700">
-                  1Y: {fund.y1}
-                </span>
-                <span className="text-[10px] sm:text-xs font-bold rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1 bg-blue-100 text-blue-700">
-                  3Y: {fund.y3}
-                </span>
-                <span className="text-[10px] sm:text-xs font-bold rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1 bg-orange-100 text-orange-700">
-                  5Y: {fund.y5}
-                </span>
-              </div>
+                  {/* Returns row */}
+                  <div className="flex gap-1.5 sm:gap-2 mb-3 sm:mb-4 flex-wrap">
+                    <span className="text-[10px] sm:text-xs font-bold rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1 bg-green-100 text-green-700">
+                      1Y: {fund.y1}
+                    </span>
+                    <span className="text-[10px] sm:text-xs font-bold rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1 bg-blue-100 text-blue-700">
+                      3Y: {fund.y3}
+                    </span>
+                    <span className="text-[10px] sm:text-xs font-bold rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1 bg-orange-100 text-orange-700">
+                      5Y: {fund.y5}
+                    </span>
+                  </div>
 
-              {/* Bottom row */}
-              <div className="flex items-center justify-between">
-                <span
-                  className={`text-[10px] sm:text-xs font-medium rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1 ${riskColors[fund.risk]}`}
-                >
-                  {fund.risk} Risk
-                </span>
-                <button className="text-xs sm:text-sm brand-gradient-bg text-white rounded-lg px-3 sm:px-4 py-1.5 sm:py-2 font-semibold hover:opacity-90 transition-all duration-300">
-                  Invest Now
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+                  {/* Bottom row */}
+                  <div className="flex items-center justify-between mt-auto">
+                    <span
+                      className={`text-[10px] sm:text-xs font-medium rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1 ${riskColors[fund.risk]}`}
+                    >
+                      {fund.risk} Risk
+                    </span>
+                    <motion.button 
+                      variants={buttonHover}
+                      whileHover="hover"
+                      whileTap="tap"
+                      className="text-xs sm:text-sm brand-gradient-bg text-white rounded-lg px-3 sm:px-4 py-1.5 sm:py-2 font-semibold"
+                    >
+                      Invest Now
+                    </motion.button>
+                  </div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
-    </section>
+    </motion.section>
   );
 }
