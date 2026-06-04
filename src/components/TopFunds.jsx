@@ -63,7 +63,7 @@ export default function TopFunds() {
           <h2 className="font-heading text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900">
             TOP PERFORMING MUTUAL FUNDS
           </h2>
-          <div className="w-16 h-1 brand-gradient-bg rounded-full mx-auto mt-3 mb-4 sm:mb-6" />
+          <div className="w-16 h-1 bg-orange-500 rounded-full mx-auto mt-3 mb-4 sm:mb-6" />
         </motion.div>
 
         {/* Tab pills */}
@@ -76,7 +76,7 @@ export default function TopFunds() {
               onClick={() => setActiveTab(tab)}
               className={`rounded-full px-4 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold transition-all duration-300 ${
                 tab === activeTab
-                  ? 'brand-gradient-bg text-white shadow-md'
+                  ? 'bg-orange-500 hover:bg-orange-600 text-white shadow-md'
                   : 'border border-slate-300 text-slate-600 hover:border-orange-500 hover:text-orange-500'
               }`}
             >
@@ -106,7 +106,7 @@ export default function TopFunds() {
                   {/* Top row */}
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
                     <div
-                      className={`w-8 h-8 sm:w-10 sm:h-10 ${fund.color} rounded-lg sm:rounded-xl flex items-center justify-center text-white font-heading font-bold text-[10px] sm:text-sm shrink-0`}
+                      className="w-8 h-8 sm:w-10 sm:h-10 bg-slate-100 rounded-lg sm:rounded-xl flex items-center justify-center text-slate-700 font-heading font-bold text-[10px] sm:text-sm shrink-0"
                     >
                       {fund.abbr}
                     </div>
@@ -120,13 +120,13 @@ export default function TopFunds() {
 
                   {/* Returns row */}
                   <div className="flex gap-1 sm:gap-2 mb-3 sm:mb-4 flex-wrap">
-                    <span className="text-[9px] sm:text-xs font-bold rounded-md px-1 sm:px-2 py-0.5 sm:py-1 bg-green-100 text-green-700">
+                    <span className="text-[9px] sm:text-xs font-bold rounded-md px-1 sm:px-2 py-0.5 sm:py-1 bg-slate-100 text-slate-700">
                       1Y: {fund.y1}
                     </span>
-                    <span className="text-[9px] sm:text-xs font-bold rounded-md px-1 sm:px-2 py-0.5 sm:py-1 bg-blue-100 text-blue-700">
+                    <span className="text-[9px] sm:text-xs font-bold rounded-md px-1 sm:px-2 py-0.5 sm:py-1 bg-slate-100 text-slate-700">
                       3Y: {fund.y3}
                     </span>
-                    <span className="text-[9px] sm:text-xs font-bold rounded-md px-1 sm:px-2 py-0.5 sm:py-1 bg-orange-100 text-orange-700">
+                    <span className="text-[9px] sm:text-xs font-bold rounded-md px-1 sm:px-2 py-0.5 sm:py-1 bg-slate-100 text-slate-700">
                       5Y: {fund.y5}
                     </span>
                   </div>
@@ -142,7 +142,7 @@ export default function TopFunds() {
                       variants={buttonHover}
                       whileHover="hover"
                       whileTap="tap"
-                      className="text-[10px] sm:text-sm brand-gradient-bg text-white rounded-lg px-2 sm:px-4 py-1.5 sm:py-2 font-semibold"
+                      className="text-[10px] sm:text-sm bg-orange-500 hover:bg-orange-600 text-white rounded-lg px-2 sm:px-4 py-1.5 sm:py-2 font-semibold"
                     >
                       Invest Now
                     </motion.button>

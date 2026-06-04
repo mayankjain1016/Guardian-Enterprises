@@ -56,47 +56,82 @@ export default function SeamlessInvesting() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
           {/* Left — Phone Mockup */}
           <motion.div variants={fadeInLeft} className="relative flex justify-center order-2 lg:order-1">
-            <div className="w-60 sm:w-72 bg-slate-900 rounded-3xl relative shadow-2xl overflow-hidden border-4 border-slate-700">
-              {/* Phone notch */}
-              <div className="w-20 h-4 bg-slate-900 rounded-b-xl mx-auto" />
+            {/* Outer iPhone Frame */}
+            <div className="w-[220px] sm:w-[260px] md:w-[280px] h-[460px] sm:h-[540px] md:h-[580px] bg-gray-900 rounded-[2.5rem] p-1.5 sm:p-2 shadow-2xl relative border border-gray-700/50">
+              
+              {/* Inner Screen */}
+              <div className="w-full h-full bg-slate-900 rounded-[2.25rem] overflow-hidden relative border border-gray-800 pb-6">
+                
+                {/* Dynamic Island / Notch */}
+                <div className="absolute top-0 inset-x-0 h-6 flex justify-center z-20">
+                  <div className="w-24 sm:w-28 h-5 sm:h-6 bg-black rounded-b-xl sm:rounded-b-2xl"></div>
+                </div>
 
-              {/* Screen Content */}
-              <div className="p-3 sm:p-4 pt-2 sm:pt-3">
-                <div className="flex items-center justify-between mb-3">
-                  <p className="text-white text-xs sm:text-sm font-semibold">{currentPhone.header}</p>
-                  <div className="w-6 h-6 rounded-full bg-orange-500/20 flex items-center justify-center">
-                    <FiSettings className="text-orange-400 text-xs" />
+                {/* Status Bar (Dark mode) */}
+                <div className="pt-2 sm:pt-2.5 px-5 flex justify-between items-center relative z-10 text-white mb-2">
+                  <span className="text-[9px] sm:text-[10px] font-semibold tracking-tight">9:41</span>
+                  <div className="flex gap-1.5 items-center">
+                    {/* Signal bars */}
+                    <div className="flex items-end gap-[1.5px] h-2.5">
+                      <div className="w-[2.5px] h-1 bg-white rounded-sm"></div>
+                      <div className="w-[2.5px] h-1.5 bg-white rounded-sm"></div>
+                      <div className="w-[2.5px] h-2 bg-white rounded-sm"></div>
+                      <div className="w-[2.5px] h-2.5 bg-white rounded-sm"></div>
+                    </div>
+                    {/* WiFi */}
+                    <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 18.5C12.8284 18.5 13.5 17.8284 13.5 17C13.5 16.1716 12.8284 15.5 12 15.5C11.1716 15.5 10.5 16.1716 10.5 17C10.5 17.8284 11.1716 18.5 12 18.5Z" fill="currentColor"/>
+                      <path d="M7 13.9C9.7614 11.1386 14.2386 11.1386 17 13.9M4 10.8999C8.41824 6.48169 15.5817 6.48169 20 10.8999M1 8C7.0751 1.92487 16.9249 1.92487 23 8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+                    </svg>
+                    {/* Battery */}
+                    <div className="w-4 h-2.5 border border-white rounded-[3px] p-[1px] flex items-center relative">
+                      <div className="w-full h-full bg-white rounded-[1px]"></div>
+                      <div className="absolute -right-[2px] top-1/2 -translate-y-1/2 w-[2px] h-[3px] bg-white rounded-r-sm"></div>
+                    </div>
                   </div>
                 </div>
 
-                {/* Mock Fund Name */}
-                <div className="bg-slate-700/50 rounded-lg p-2.5 mb-3">
-                  <p className="text-slate-400 text-[10px]">Current NAV</p>
-                  <p className="text-white font-heading font-bold text-lg">₹245.67</p>
-                  <span className="text-green-400 text-[10px] font-semibold">▲ +2.4% Today</span>
+                {/* Screen Content */}
+                <div className="p-3 sm:p-4 pt-1">
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="text-white text-xs sm:text-sm font-semibold">{currentPhone.header}</p>
+                    <div className="w-6 h-6 rounded-full bg-orange-500/20 flex items-center justify-center">
+                      <FiSettings className="text-orange-400 text-xs" />
+                    </div>
+                  </div>
+
+                  {/* Mock Fund Name */}
+                  <div className="bg-slate-700/50 rounded-lg p-2.5 mb-3">
+                    <p className="text-slate-400 text-[10px]">Current NAV</p>
+                    <p className="text-white font-heading font-bold text-lg">₹245.67</p>
+                    <span className="text-green-400 text-[10px] font-semibold">▲ +2.4% Today</span>
+                  </div>
+
+                  {/* Chart bars */}
+                  <div className="flex items-end gap-1.5 h-24 sm:h-28 mb-2">
+                    {currentPhone.chart.map((h, i) => (
+                      <div
+                        key={i}
+                        className="flex-1 rounded-t transition-all duration-500"
+                        style={{
+                          height: `${h}%`,
+                          backgroundColor: i >= 5 ? '#F97316' : '#16A34A',
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <div className="flex justify-between text-[8px] sm:text-[9px] text-slate-500">
+                    <span>Jan</span><span>Mar</span><span>Jun</span><span>Sep</span><span>Dec</span>
+                  </div>
+
+                  {/* Return badge */}
+                  <div className="mt-3 bg-green-500/10 rounded-lg p-2 text-center">
+                    <span className="text-green-400 text-[10px] sm:text-xs font-bold">+38.4% Returns (3Y)</span>
+                  </div>
                 </div>
 
-                {/* Chart bars */}
-                <div className="flex items-end gap-1.5 h-24 sm:h-28 mb-2">
-                  {currentPhone.chart.map((h, i) => (
-                    <div
-                      key={i}
-                      className="flex-1 rounded-t transition-all duration-500"
-                      style={{
-                        height: `${h}%`,
-                        backgroundColor: i >= 5 ? '#F97316' : '#16A34A',
-                      }}
-                    />
-                  ))}
-                </div>
-                <div className="flex justify-between text-[8px] sm:text-[9px] text-slate-500">
-                  <span>Jan</span><span>Mar</span><span>Jun</span><span>Sep</span><span>Dec</span>
-                </div>
-
-                {/* Return badge */}
-                <div className="mt-3 bg-green-500/10 rounded-lg p-2 text-center">
-                  <span className="text-green-400 text-[10px] sm:text-xs font-bold">+38.4% Returns (3Y)</span>
-                </div>
+                {/* Home Indicator line */}
+                <div className="absolute bottom-1.5 sm:bottom-2 left-1/2 -translate-x-1/2 w-1/3 h-1 sm:h-1.5 bg-white/50 rounded-full"></div>
               </div>
             </div>
 

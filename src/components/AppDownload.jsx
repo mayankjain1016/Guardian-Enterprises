@@ -1,6 +1,9 @@
 import { FaApple, FaGooglePlay } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { staggerContainer, fadeInLeft, fadeInRight, hoverScale } from '../utils/animations';
+import logo from '../Logo.jpeg';
+import { IPhoneMockup } from 'react-device-mockup';
+import screenshot from '../screenshot.png';
 
 export default function AppDownload() {
   return (
@@ -18,67 +21,18 @@ export default function AppDownload() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
           {/* Left — Phone Mockup */}
-          <motion.div variants={fadeInLeft} className="flex justify-center order-2 lg:order-1">
-            <div className="w-48 sm:w-56 md:w-64 bg-white rounded-3xl shadow-2xl border-4 border-white/50 overflow-hidden">
-              {/* Phone Header */}
-              <div className="bg-slate-50 p-2.5 sm:p-3 border-b border-slate-100">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-orange-500 font-heading font-extrabold text-[10px] sm:text-xs">G</span>
-                    <span className="font-heading font-bold text-[9px] sm:text-[10px] text-slate-800">Guardian App</span>
-                  </div>
-                  <span className="text-[8px] sm:text-[9px] text-slate-400">9:41 AM</span>
-                </div>
-              </div>
-
-              {/* Market Ticker */}
-              <div className="p-2.5 sm:p-3 bg-slate-900">
-                <div className="flex justify-between text-[8px] sm:text-[9px] mb-0.5 sm:mb-1">
-                  <span className="text-slate-400">NIFTY 50</span>
-                  <span className="text-green-400">22,456.80 ↑</span>
-                </div>
-                <div className="flex justify-between text-[8px] sm:text-[9px]">
-                  <span className="text-slate-400">SENSEX</span>
-                  <span className="text-green-400">73,890.45 ↑</span>
-                </div>
-              </div>
-
-              {/* Portfolio Section */}
-              <div className="p-2.5 sm:p-3">
-                <p className="text-[8px] sm:text-[9px] text-slate-400 mb-0.5">Portfolio Value</p>
-                <p className="font-heading font-bold text-base sm:text-lg text-slate-800 mb-0.5">₹12,48,000</p>
-                <span className="text-green-500 text-[9px] sm:text-[10px] font-semibold">▲ +22.4% all time</span>
-
-                {/* Mini chart */}
-                <div className="flex items-end gap-0.5 h-10 sm:h-12 mt-2 sm:mt-3 mb-1.5 sm:mb-2">
-                  {[30, 45, 40, 55, 50, 60, 55, 70, 65, 75, 72, 80, 78, 85, 82, 90].map(
-                    (h, i) => (
-                      <div
-                        key={i}
-                        className="flex-1 rounded-t-sm"
-                        style={{
-                          height: `${h}%`,
-                          backgroundColor: '#16A34A',
-                        }}
-                      />
-                    )
-                  )}
-                </div>
-
-                {/* CTA Button */}
-                <button className="w-full brand-gradient-bg text-white rounded-lg py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold mt-1.5 sm:mt-2">
-                  INVEST NOW
-                </button>
-              </div>
-
-              {/* Bottom nav */}
-              <div className="flex justify-around p-1.5 sm:p-2 bg-slate-50 border-t border-slate-100 text-[7px] sm:text-[8px] text-slate-400">
-                <span>Home</span>
-                <span>Funds</span>
-                <span className="text-orange-500 font-semibold">Portfolio</span>
-                <span>More</span>
-              </div>
-            </div>
+          <motion.div variants={fadeInLeft} className="flex justify-center order-2 lg:order-1 relative">
+            <IPhoneMockup screenWidth={250} hideStatusBar={true} hideNavBar={true}>
+              <img
+                src={screenshot}
+                alt="Website Preview"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover"
+                }}
+              />
+            </IPhoneMockup>
           </motion.div>
 
           {/* Right — CTA */}

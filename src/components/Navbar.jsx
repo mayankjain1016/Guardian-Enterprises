@@ -102,7 +102,7 @@ export default function Navbar() {
                 key={link}
                 href="#"
                 whileHover={{ scale: 1.05, color: '#f97316' }}
-                className="whitespace-nowrap text-sm font-medium text-slate-600 hover:border-b-2 hover:border-orange-500 pb-px transition-all duration-200"
+                className="whitespace-nowrap text-sm font-medium text-slate-900 hover:border-b-2 hover:border-orange-500 pb-px transition-all duration-200"
               >
                 {link}
               </motion.a>
@@ -132,7 +132,7 @@ export default function Navbar() {
           <a
             key={link}
             href="#"
-            className="block py-3 px-4 text-sm font-medium text-slate-600 hover:text-orange-500 hover:bg-orange-50 transition-colors border-b border-slate-50"
+            className="block py-3 px-4 text-sm font-medium text-slate-900 hover:text-orange-500 hover:bg-orange-50 transition-colors border-b border-slate-50"
           >
             {link}
           </a>
